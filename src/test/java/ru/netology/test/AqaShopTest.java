@@ -48,6 +48,7 @@ public class AqaShopTest {
         mainPage.payByCard();
         var buy = new BuyPage();
         buy.sendForm(generateData(cardNumber(validCardNumber()), 1, 1, name(randomName()), cvv(cvc1())));
+        buy.success();
 
     }
 

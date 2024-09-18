@@ -221,4 +221,12 @@ public class BuyPage {
         name.sendKeys(cardData.getName());
         send.click();
     }
+
+    public void success(){
+        successSend.shouldBe(Condition.visible);
+    }
+
+    public void error(){
+        errorSend.shouldBe(Condition.visible);
+    }
 }
