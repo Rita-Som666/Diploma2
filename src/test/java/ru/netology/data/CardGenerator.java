@@ -44,10 +44,22 @@ public class CardGenerator {
 
     }
 
-   public static String month(int plusMonths){
+   public static String validMonth(int plusMonths){
 
         return LocalDate.now().plusMonths(plusMonths).format(DateTimeFormatter.ofPattern("MM"));
     }
+
+    public static String invalidFormatMonth(int plusMonths){
+
+        return LocalDate.now().plusMonths(plusMonths).format(DateTimeFormatter.ofPattern("M"));
+    }
+
+    public static String invalidMonth(){
+        Random random = new Random();
+        return String.valueOf(12 + random.nextInt(88));
+    }
+
+    public static String month(String month){return month;}
 
    public   static String year(int plusYears){
 
@@ -76,8 +88,9 @@ public class CardGenerator {
         return faker.finance().creditCard();
     }
 
-   public   static String cvv(String cvv){
-        return cvv;
+   public   static String cvv(String cvc){
+
+        return cvc;
     }
 
    public static String cvc1(){
@@ -111,8 +124,11 @@ public class CardGenerator {
         return new CardData(validCardNumber(), invalidName1(), month(1), year(1), cvc());
     }*/
 
-    public static CardData generateData(String cardNumber, int plusMonth, int plusYear, String name, String cvv){
-        return new CardData(cardNumber(cardNumber), name(name), month(plusMonth), year(plusYear), cvv(cvv));
+    public static CardData generateData(String cardNumber, String month, int plusYear, String name, String cvv){
+        return new CardData(cardNumber(cardNumber), name(name), month(month), year(plusYear), cvv(cvv));
+    }
+
+
     }
 
     /*public static CardData invalidUser3(){
@@ -126,4 +142,4 @@ public class CardGenerator {
     public static CardData invalidCvv(){
         return new CardData(validCardNumber(), randomName(), month(), year(), invalidCvc());
     }*/
-}
+

@@ -36,6 +36,10 @@ public class BuyPage {
     private final SelenideElement send = buttons.findBy(Condition.text("Продолжить"));
     private final SelenideElement successSend = $(byText("Операция одобрена Банком."));
     private final SelenideElement errorSend = $(byText("Ошибка! Банк отказал в проведении операции."));
+    private final SelenideElement invalidFormat = $(withText("Неверный формат"));
+    private final SelenideElement invalidValidityPeriod = $(withText("Неверно указан срок действия карты"));
+    private final SelenideElement blankField = $(withText("Поле обязательно для заполнения"));
+    private final SelenideElement expired = $(withText("Истёк срок действия карты"));
 
     /*private final CardData validUser = CardGenerator.validData();
     private final CardData invalidUser1 = CardGenerator.invalidStatus();
@@ -219,14 +223,75 @@ public class BuyPage {
         month.sendKeys(cardData.getMonth());
         year.sendKeys(cardData.getYear());
         name.sendKeys(cardData.getName());
+        cvv.sendKeys(cardData.getCvv());
         send.click();
     }
 
+    public void sendFormWithOutNumber(CardData cardData){
+        month.sendKeys(cardData.getMonth());
+        year.sendKeys(cardData.getYear());
+        name.sendKeys(cardData.getName());
+        cvv.sendKeys(cardData.getCvv());
+        send.click();
+    }
+
+    public void sendFormWithOutMonth(CardData cardData){
+        cardNumber.sendKeys(cardData.getCardNumber());
+
+        year.sendKeys(cardData.getYear());
+        name.sendKeys(cardData.getName());
+        cvv.sendKeys(cardData.getCvv());
+        send.click();
+    }
+
+    public void sendFormWithOutYear(CardData cardData){
+        cardNumber.sendKeys(cardData.getCardNumber());
+        month.sendKeys(cardData.getMonth());
+
+        name.sendKeys(cardData.getName());
+        cvv.sendKeys(cardData.getCvv());
+        send.click();
+    }
+
+    public void sendFormWithOutName(CardData cardData){
+        cardNumber.sendKeys(cardData.getCardNumber());
+        month.sendKeys(cardData.getMonth());
+        year.sendKeys(cardData.getYear());
+
+        cvv.sendKeys(cardData.getCvv());
+        send.click();
+    }
+
+    public void sendFormWithOutCvv(CardData cardData){
+        cardNumber.sendKeys(cardData.getCardNumber());
+        month.sendKeys(cardData.getMonth());
+        year.sendKeys(cardData.getYear());
+        name.sendKeys(cardData.getName());
+
+        send.click();
+    }
+
+    public void sendBlankForm(){send.click();}
+
+    public void blankFields(){
+            $$(withText("Поле обязательно для заполнения")).shouldHave(size(5));
+    }
+
+
+
     public void success(){
-        successSend.shouldBe(Condition.visible);
+        successSend.shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
 
     public void error(){
-        errorSend.shouldBe(Condition.visible);
+        errorSend.shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
+
+    public void invalidFormat(){invalidFormat.shouldBe(Condition.visible);}
+
+    public void invalidValidityPeriod(){invalidValidityPeriod.shouldBe(Condition.visible);}
+
+    public void blankField(){blankField.shouldBe(Condition.visible);}
+
+    public void expired(){expired.shouldBe(Condition.visible);}
 }

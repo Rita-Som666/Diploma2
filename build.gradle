@@ -66,6 +66,10 @@ test {
 
     systemProperty 'chromeoptions.prefs', System.getProperty('chromeoptions.prefs', "profile.password_manager_leak_detection=false")
     jvmArgs = [ "-javaagent:${configurations.agent.singleFile}" ]
+
+    systemProperty 'db.url', System.getProperty('db.url', 'jdbc:mysql://localhost:3306/app')
+    systemProperty 'db.user', System.getProperty('db.user', 'user')
+    systemProperty 'db.password', System.getProperty('db.password', 'password')
 }
 tasks.withType(Test) {
     systemProperty "allure.results.directory", layout.buildDirectory.dir("allure-results").get().asFile.absolutePath

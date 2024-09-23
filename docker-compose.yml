@@ -20,9 +20,7 @@ services:
     volumes:
       - ./gate-simulator/data.json:/docker-entrypoint-initdb.d/data.json
 
-  gate-simulator:
-    build: ./gate-simulator  # Путь к папке с проектом эмулятора
-    command: npm start        # Команда для запуска эмулятора
-    volumes:
-      - ./gate-simulator:/usr/src/app  # Монтирование исходного кода
-    working_dir: /usr/src/app           # Рабочая директория внутри контейнера
+  node-app:
+    build: ./gate-simulator
+    ports:
+      - '9999:9999'
