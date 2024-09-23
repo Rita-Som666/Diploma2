@@ -10,7 +10,7 @@ build: off  # будем использовать свой скрипт сбор
 
 install:
   # запускаем SUT (& означает, что в фоновом режиме не блокируем терминал для запуска тестов)
-  - docker-compose up -d
+  - docker-compose up --build
   - sleep 30
   - java -jar ./artifacts/aqa-shop.jar &
   - chmod +x gradlew
