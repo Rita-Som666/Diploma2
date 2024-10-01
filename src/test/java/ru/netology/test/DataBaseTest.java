@@ -21,11 +21,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ru.netology.data.CardGenerator.*;
 import static ru.netology.data.CardGenerator.cvc1;
 import static ru.netology.data.SQLHelper.checkDataExists;
+import static ru.netology.data.SQLHelper.cleaner;
 
 public class DataBaseTest {
 
     @BeforeAll
     static void setUpAll() {
+        cleaner();
         SelenideLogger.addListener("allure", new AllureSelenide());
         open("http://localhost:8080/");
 
@@ -76,8 +78,8 @@ public class DataBaseTest {
         var buy = new BuyPage();
         buy.sendForm(generateData(cardNumber(validCardNumber()), validMonth(1), 1, name(randomName()), cvv(cvc1())));
         buy.success();
-        String startTime = LocalDateTime.now().minusHours(5).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
-        String nextMinute = LocalDateTime.now().minusHours(5).plusMinutes(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
+        String startTime = LocalDateTime.now().minusHours(4).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
+        String nextMinute = LocalDateTime.now().minusHours(4).plusMinutes(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
         boolean dataExists = checkDataExists(startTime, nextMinute, "SELECT * FROM payment_entity WHERE created BETWEEN ? AND ?");
         assertTrue(dataExists);
     }

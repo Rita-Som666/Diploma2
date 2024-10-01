@@ -12,6 +12,7 @@ import ru.netology.page.MainPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static ru.netology.data.CardGenerator.*;
+import static ru.netology.data.SQLHelper.cleaner;
 
 
 public class AqaShopTestPayToCard {
@@ -19,6 +20,7 @@ public class AqaShopTestPayToCard {
 
     @BeforeAll
     static void setUpAll() {
+        cleaner();
         SelenideLogger.addListener("allure", new AllureSelenide());
         open("http://localhost:8080/");
 
