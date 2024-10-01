@@ -13,13 +13,16 @@ public class SQLHelper {
     }
 
     private static Connection getConn() throws SQLException {
-        return DriverManager.getConnection(System.getProperty("jdbc:mysql://localhost:3306/app"), "user", "password");
+        String url = "jdbc:mysql://localhost:3306/app";
+        String user = "user";
+        String password = "password";
+
+        return DriverManager.getConnection(url, user, password);
     }
 
     @SneakyThrows
-    public static boolean checkDataExists(String startTime, String nextMinute) throws SQLException {
+    public static boolean checkDataExists(String startTime, String nextMinute, String querySQL) throws SQLException {
 
-        String querySQL = "SELECT * FROM payment_entity WHERE created BETWEEN ? AND ?";
 
         try (PreparedStatement preparedStatement = getConn().prepareStatement(querySQL)) {
             // Устанавливаем значения параметров
