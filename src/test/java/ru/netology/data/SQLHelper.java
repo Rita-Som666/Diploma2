@@ -25,13 +25,13 @@ public class SQLHelper {
 
 
         try (PreparedStatement preparedStatement = getConn().prepareStatement(querySQL)) {
-            // Устанавливаем значения параметров
+
             preparedStatement.setString(1, startTime);
             preparedStatement.setString(2, nextMinute);
 
-            // Выполняем запрос и проверяем наличие данных
+
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next(); // Возвращает true, если данные найдены // Возвращает true, если данные найдены
+                return resultSet.next();
             }
         }
     }

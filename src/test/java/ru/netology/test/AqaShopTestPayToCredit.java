@@ -7,7 +7,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.netology.page.BuyPage;
+
 import ru.netology.page.CreditPage;
 import ru.netology.page.MainPage;
 
@@ -16,27 +16,26 @@ import static ru.netology.data.CardGenerator.*;
 
 public class AqaShopTestPayToCredit {
     @BeforeAll
-    static void setUpAll(){
+    static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());
         open("http://localhost:8080/");
-
 
 
     }
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         Selenide.refresh();
     }
 
     @AfterAll
-    static void tearDownAll(){
+    static void tearDownAll() {
         SelenideLogger.removeListener("allure");
     }
 
     @Test
 
-    public void successBuy(){
+    public void successBuy() {
 
 
         var mainPage = new MainPage();
@@ -48,8 +47,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-
-    void sendWithInvalidCardNumber(){
+    void sendWithInvalidCardNumber() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -58,7 +56,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithNumberUnknownToTheDatabase(){
+    void sendWithNumberUnknownToTheDatabase() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -67,7 +65,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithMonthMore12(){
+    void sendWithMonthMore12() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -76,7 +74,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithOneFigureMonth(){
+    void sendWithOneFigureMonth() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -85,7 +83,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithYearLessCurrent(){
+    void sendWithYearLessCurrent() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -95,7 +93,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithMonthLessCurrentAndCurrentYear(){
+    void sendWithMonthLessCurrentAndCurrentYear() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -104,7 +102,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithYearMorePlus5(){
+    void sendWithYearMorePlus5() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -113,7 +111,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithCyrillicName(){
+    void sendWithCyrillicName() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -122,7 +120,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithDigitInName(){
+    void sendWithDigitInName() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -131,7 +129,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithSymbolInName(){
+    void sendWithSymbolInName() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -140,7 +138,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithTwoDigitsInCvv(){
+    void sendWithTwoDigitsInCvv() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -149,7 +147,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithOutNumber(){
+    void sendWithOutNumber() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -158,7 +156,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithOutMonth(){
+    void sendWithOutMonth() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -167,7 +165,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithOutYear(){
+    void sendWithOutYear() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -176,7 +174,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithOutName(){
+    void sendWithOutName() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -185,7 +183,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendWithOutCvv(){
+    void sendWithOutCvv() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();
@@ -194,7 +192,7 @@ public class AqaShopTestPayToCredit {
     }
 
     @Test
-    void sendBlankForm(){
+    void sendBlankForm() {
         var mainPage = new MainPage();
         mainPage.payByCredit();
         var credit = new CreditPage();

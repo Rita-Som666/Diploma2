@@ -41,257 +41,94 @@ public class BuyPage {
     private final SelenideElement blankField = $(withText("Поле обязательно для заполнения"));
     private final SelenideElement expired = $(withText("Истёк срок действия карты"));
 
-    /*private final CardData validUser = CardGenerator.validData();
-    private final CardData invalidUser1 = CardGenerator.invalidStatus();
-    private final CardData invalidUser2 = CardGenerator.invalidDate1();
-    private final CardData invalidUser3 = CardGenerator.invalidDate2();
-    private final CardData invalidUser4 = CardGenerator.invalidDate3();
-    private final CardData invalidUser5 = CardGenerator.invalidUser1();
-    private final CardData invalidUser6 = CardGenerator.invalidUser2();
-    private final CardData invalidUser7 = CardGenerator.invalidUser3();
-    private final CardData invalidUser8 = CardGenerator.invalidUser4();
-    private final CardData invalidUser9 = CardGenerator.invalidCvv();
-    private final CardData invalidUser10 = CardGenerator.invalidData();
-*/
-    public BuyPage(){
+    public BuyPage() {
         payByCard.shouldBe(Condition.visible);
     }
 
-    /* public void successBuy (){
-        cardNumber.sendKeys(validUser.getCardNumber());
-        month.sendKeys(validUser.getMonth());
-        year.sendKeys(validUser.getYear());
-        name.sendKeys(validUser.getName());
-        cvv.sendKeys(validUser.getCvv());
+
+    public void sendForm(CardData cardData) {
+        cardNumber.sendKeys(cardData.getCardNumber());
+        month.sendKeys(cardData.getMonth());
+        year.sendKeys(cardData.getYear());
+        name.sendKeys(cardData.getName());
+        cvv.sendKeys(cardData.getCvv());
         send.click();
-        successSend.shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
 
-    public void blockStatus(){
-        cardNumber.sendKeys(invalidUser1.getCardNumber());
-        month.sendKeys(invalidUser1.getMonth());
-        year.sendKeys(invalidUser1.getYear());
-        name.sendKeys(invalidUser1.getName());
-        cvv.sendKeys(invalidUser1.getCvv());
+    public void sendFormWithOutNumber(CardData cardData) {
+        month.sendKeys(cardData.getMonth());
+        year.sendKeys(cardData.getYear());
+        name.sendKeys(cardData.getName());
+        cvv.sendKeys(cardData.getCvv());
         send.click();
-        errorSend.shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
 
-    public void expired1(){
-        cardNumber.sendKeys(invalidUser2.getCardNumber());
-        month.sendKeys(invalidUser2.getMonth());
-        year.sendKeys(invalidUser2.getYear());
-        name.sendKeys(invalidUser2.getName());
-        cvv.sendKeys(invalidUser2.getCvv());
+    public void sendFormWithOutMonth(CardData cardData) {
+        cardNumber.sendKeys(cardData.getCardNumber());
+
+        year.sendKeys(cardData.getYear());
+        name.sendKeys(cardData.getName());
+        cvv.sendKeys(cardData.getCvv());
         send.click();
-        $(withText("Неверно указан срок действия карты")).shouldBe(Condition.visible);
     }
 
+    public void sendFormWithOutYear(CardData cardData) {
+        cardNumber.sendKeys(cardData.getCardNumber());
+        month.sendKeys(cardData.getMonth());
 
-    public void expired2(){
-        cardNumber.sendKeys(invalidUser3.getCardNumber());
-        month.sendKeys(invalidUser3.getMonth());
-        year.sendKeys(invalidUser3.getYear());
-        name.sendKeys(invalidUser3.getName());
-        cvv.sendKeys(invalidUser3.getCvv());
+        name.sendKeys(cardData.getName());
+        cvv.sendKeys(cardData.getCvv());
         send.click();
-        $(withText("Истёк срок действия карты")).shouldBe(Condition.visible);
     }
 
-    public void notTrueYear(){
-        cardNumber.sendKeys(invalidUser4.getCardNumber());
-        month.sendKeys(invalidUser4.getMonth());
-        year.sendKeys(invalidUser4.getYear());
-        name.sendKeys(invalidUser4.getName());
-        cvv.sendKeys(invalidUser4.getCvv());
+    public void sendFormWithOutName(CardData cardData) {
+        cardNumber.sendKeys(cardData.getCardNumber());
+        month.sendKeys(cardData.getMonth());
+        year.sendKeys(cardData.getYear());
+
+        cvv.sendKeys(cardData.getCvv());
         send.click();
-        $(withText("Неверно указан срок действия карты")).shouldBe(Condition.visible);
     }
 
-    public void justFirstName(){
-        cardNumber.sendKeys(invalidUser5.getCardNumber());
-        month.sendKeys(invalidUser5.getMonth());
-        year.sendKeys(invalidUser5.getYear());
-        name.sendKeys(invalidUser5.getName());
-        cvv.sendKeys(invalidUser5.getCvv());
+    public void sendFormWithOutCvv(CardData cardData) {
+        cardNumber.sendKeys(cardData.getCardNumber());
+        month.sendKeys(cardData.getMonth());
+        year.sendKeys(cardData.getYear());
+        name.sendKeys(cardData.getName());
+
         send.click();
-        $(withText("Неверный формат")).shouldBe(Condition.visible);
     }
 
-    public void nameOnCyrillic(){
-        cardNumber.sendKeys(invalidUser6.getCardNumber());
-        month.sendKeys(invalidUser6.getMonth());
-        year.sendKeys(invalidUser6.getYear());
-        name.sendKeys(invalidUser6.getName());
-        cvv.sendKeys(invalidUser6.getCvv());
+    public void sendBlankForm() {
         send.click();
-        $(withText("Неверный формат")).shouldBe(Condition.visible);
     }
 
-    public void nameWithDigit(){
-        cardNumber.sendKeys(invalidUser7.getCardNumber());
-        month.sendKeys(invalidUser7.getMonth());
-        year.sendKeys(invalidUser7.getYear());
-        name.sendKeys(invalidUser7.getName());
-        cvv.sendKeys(invalidUser7.getCvv());
-        send.click();
-        $(withText("Неверный формат")).shouldBe(Condition.visible);
-    }
-
-    public void nameWithSymbol(){
-        cardNumber.sendKeys(invalidUser8.getCardNumber());
-        month.sendKeys(invalidUser8.getMonth());
-        year.sendKeys(invalidUser8.getYear());
-        name.sendKeys(invalidUser8.getName());
-        cvv.sendKeys(invalidUser8.getCvv());
-        send.click();
-        $(withText("Неверный формат")).shouldBe(Condition.visible);
-    }
-
-    public void invalidCvv(){
-        cardNumber.sendKeys(invalidUser9.getCardNumber());
-        month.sendKeys(invalidUser9.getMonth());
-        year.sendKeys(invalidUser9.getYear());
-        name.sendKeys(invalidUser9.getName());
-        cvv.sendKeys(invalidUser9.getCvv());
-        send.click();
-        $(withText("Неверный формат")).shouldBe(Condition.visible);
-    }
-
-    public void cardNumberNotFromDataBase(){
-        cardNumber.sendKeys(invalidUser10.getCardNumber());
-        month.sendKeys(invalidUser10.getMonth());
-        year.sendKeys(invalidUser10.getYear());
-        name.sendKeys(invalidUser10.getName());
-        cvv.sendKeys(invalidUser10.getCvv());
-        send.click();
-        errorSend.shouldBe(Condition.visible, Duration.ofSeconds(15));
-    }
-
-    public void blankNumber(){
-        month.sendKeys(validUser.getMonth());
-        year.sendKeys(validUser.getYear());
-        name.sendKeys(validUser.getName());
-        cvv.sendKeys(validUser.getCvv());
-        send.click();
-        $(withText("Поле обязательно для заполнения")).shouldBe(Condition.visible);
-    }
-
-    public void blankMonth(){
-        cardNumber.sendKeys(validUser.getCardNumber());
-        year.sendKeys(validUser.getYear());
-        name.sendKeys(validUser.getName());
-        cvv.sendKeys(validUser.getCvv());
-        send.click();
-        $(withText("Поле обязательно для заполнения")).shouldBe(Condition.visible);
-    }
-
-    public void blankYear(){
-        cardNumber.sendKeys(validUser.getCardNumber());
-        month.sendKeys(validUser.getMonth());
-        name.sendKeys(validUser.getName());
-        cvv.sendKeys(validUser.getCvv());
-        send.click();
-        $(withText("Поле обязательно для заполнения")).shouldBe(Condition.visible);
-    }
-
-    public void blankName(){
-        cardNumber.sendKeys(validUser.getCardNumber());
-        month.sendKeys(validUser.getMonth());
-        year.sendKeys(validUser.getYear());
-        cvv.sendKeys(validUser.getCvv());
-        send.click();
-        $(withText("Поле обязательно для заполнения")).shouldBe(Condition.visible);
-    }
-
-    public void blankCvv(){
-        cardNumber.sendKeys(validUser.getCardNumber());
-        month.sendKeys(validUser.getMonth());
-        year.sendKeys(validUser.getYear());
-        name.sendKeys(validUser.getName());
-        send.click();
-        $(withText("Поле обязательно для заполнения")).shouldBe(Condition.visible);
-    }
-
-    public void blankForm(){
-        send.click();
+    public void blankFields() {
         $$(withText("Поле обязательно для заполнения")).shouldHave(size(5));
     }
-     */
-    public void sendForm(CardData cardData){
-        cardNumber.sendKeys(cardData.getCardNumber());
-        month.sendKeys(cardData.getMonth());
-        year.sendKeys(cardData.getYear());
-        name.sendKeys(cardData.getName());
-        cvv.sendKeys(cardData.getCvv());
-        send.click();
-    }
-
-    public void sendFormWithOutNumber(CardData cardData){
-        month.sendKeys(cardData.getMonth());
-        year.sendKeys(cardData.getYear());
-        name.sendKeys(cardData.getName());
-        cvv.sendKeys(cardData.getCvv());
-        send.click();
-    }
-
-    public void sendFormWithOutMonth(CardData cardData){
-        cardNumber.sendKeys(cardData.getCardNumber());
-
-        year.sendKeys(cardData.getYear());
-        name.sendKeys(cardData.getName());
-        cvv.sendKeys(cardData.getCvv());
-        send.click();
-    }
-
-    public void sendFormWithOutYear(CardData cardData){
-        cardNumber.sendKeys(cardData.getCardNumber());
-        month.sendKeys(cardData.getMonth());
-
-        name.sendKeys(cardData.getName());
-        cvv.sendKeys(cardData.getCvv());
-        send.click();
-    }
-
-    public void sendFormWithOutName(CardData cardData){
-        cardNumber.sendKeys(cardData.getCardNumber());
-        month.sendKeys(cardData.getMonth());
-        year.sendKeys(cardData.getYear());
-
-        cvv.sendKeys(cardData.getCvv());
-        send.click();
-    }
-
-    public void sendFormWithOutCvv(CardData cardData){
-        cardNumber.sendKeys(cardData.getCardNumber());
-        month.sendKeys(cardData.getMonth());
-        year.sendKeys(cardData.getYear());
-        name.sendKeys(cardData.getName());
-
-        send.click();
-    }
-
-    public void sendBlankForm(){send.click();}
-
-    public void blankFields(){
-            $$(withText("Поле обязательно для заполнения")).shouldHave(size(5));
-    }
 
 
-
-    public void success(){
+    public void success() {
         successSend.shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
 
-    public void error(){
+    public void error() {
         errorSend.shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
 
-    public void invalidFormat(){invalidFormat.shouldBe(Condition.visible);}
+    public void invalidFormat() {
+        invalidFormat.shouldBe(Condition.visible);
+    }
 
-    public void invalidValidityPeriod(){invalidValidityPeriod.shouldBe(Condition.visible);}
+    public void invalidValidityPeriod() {
+        invalidValidityPeriod.shouldBe(Condition.visible);
+    }
 
-    public void blankField(){blankField.shouldBe(Condition.visible);}
+    public void blankField() {
+        blankField.shouldBe(Condition.visible);
+    }
 
-    public void expired(){expired.shouldBe(Condition.visible);}
+    public void expired() {
+        expired.shouldBe(Condition.visible);
+    }
 }
